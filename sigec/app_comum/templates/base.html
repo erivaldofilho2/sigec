@@ -1,0 +1,44 @@
+ {% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>{%block titulo %} {% endblock%}</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{% static "lib/bootstrap-4-alpha/css/bootstrap.min.css" %}">
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+
+<link rel="stylesheet" type="text/css" href="{% static "estilo.css" %}">
+
+{% block styles %}
+
+{% endblock %}
+<link rel="shortcut icon" href="{% static "favicon.ico" %}" type="image/x-icon">
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+</head>
+<body>
+
+
+	{% include "header.html" %}
+	{%if request.user.id %}
+	{% endif %}
+		{% block nav %}
+			
+		{% endblock %}
+	<div class="container-fluid">
+	{%block content %}
+		
+
+		
+		
+	{% endblock %}
+	</div><!-- container-fluid -->
+	<script type="text/javascript" src="{% static "js/jquery-1.11.3.js" %}"></script>
+	<script type="text/javascript" src="{% static "lib/bootstrap-4-alpha/js/bootstrap.min.js" %}"></script>
+	{% block javascripts %}
+	
+	{% endblock %}
+</body>
+</html>
+
