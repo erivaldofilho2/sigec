@@ -8,7 +8,7 @@ from django.db import models
 
 class Endereco(models.Model):
     endereco = models.CharField(max_length=100,blank=True)
-    numero = models.DecimalField(max_digits = 5, decimal_places=0)
+    numero = models.DecimalField(max_digits = 5, decimal_places=0, blank=True)
     complemento = models.CharField(max_length=100,blank=True)
     bairro = models.CharField(max_length=50,blank=True)
     cidade = models.CharField(max_length=50,blank=True)

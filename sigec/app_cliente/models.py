@@ -9,10 +9,10 @@ from app_comum.models import *
 
 class ClientePF(models.Model):
     nome = models.CharField(max_length=100)
-    cpf = models.CharField(max_length=14)
+    cpf = models.CharField(max_length=14,blank=True)
     endereco = models.ForeignKey(Endereco, null=True,blank=True)
     contato = models.ForeignKey(Contato, null=True,blank=True)
-    observacao = models.TextField()
+    observacao = models.TextField(blank=True)
     
     def __unicode__(self):
         return self.nome or u''

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+	{% block titulo %}Sigec - Clientes{% endblock %}
+
+{% block content %}
+<h1>ADD CLIENTE</h1>
+
+<form action="/clientes/add_cliente" method="post"> {% csrf_token %}
+
+{{form_clientePF}}
+{{form_endereco}}
+{{form_contato}}
+
+<button type="submit">Cadastrar</button>
+</form>
+{% endblock %}

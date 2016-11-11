@@ -23,5 +23,5 @@ urlpatterns = [
     #Comum
     url(r'^', include('app_comum.urls')),
     #Cliente
-    url(r'^', include('app_cliente.urls')),
+    url(r'^clientes/', include('app_cliente.urls')),
 ]

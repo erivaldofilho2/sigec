@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+	{% block titulo %}Sigec - Clientes{% endblock %}
+
+{% block content %}
+<h1>CLIENTES</h1>
+
+{% for message in messages %}
+      <h4>{{message}}</h4>
+      {% endfor %}
+
+{{cliente}} {{endereco}} {{contato}}
+
+
+{%for cliente in clientes%}
+
+{{cliente}}<br>
+
+{% endfor %}
+{% endblock %}
