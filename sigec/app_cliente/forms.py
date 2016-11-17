@@ -9,10 +9,9 @@ class FormClientePF(ModelForm):
         model = ClientePF
         fields = ['nome','cpf','observacao']
         
-#         widgets = {
-#             'nome': TextInput(),
-#             'cpf': TextInput(),
-#             'observacao': Textarea(),
-#             }
-
+        widgets = {
+            'nome': TextInput({'class':'form-control'}),
+            'cpf': TextInput({'class':'form-control'}),
+            'observacao': Textarea({'class':'form-control'}),
+            }
 

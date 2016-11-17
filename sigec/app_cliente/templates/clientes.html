@@ -4,16 +4,34 @@
 {% block content %}
 <h1>CLIENTES</h1>
 
-{% for message in messages %}
-      <h4>{{message}}</h4>
-      {% endfor %}
-
-{{cliente}} {{endereco}} {{contato}}
+<a href="/clientes/add_cliente">Adicionar Cliente</a><hr>
 
 
-{%for cliente in clientes%}
+<table class="table">
+	<thead>
+		<tr>
+			<th>Nome</th>
+			<th>Tipo</th>
+			<th>CPF/CNPJ</th>
+			<th>Nome Contato</th>
+			<th>Telefone</th>
+			<th>E-mail</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		{%for cliente in clientes%}
+		<tr>	
+			<td>{{cliente.nome}}</td>
+			<td>-----</td>
+			<td>{{cliente.cpf}}</td>
+			<td>{{cliente.contato|default:"-----"}}</td>
+			<td>{{cliente.contato.tel_celular}}</td>
+			<td>{{cliente.contato.email}}</td>
+			<td><a href="/clientes/{{cliente.id}}/delete_cliente">Remover</a></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
 
-{{cliente}}<br>
-
-{% endfor %}
 {% endblock %}

@@ -10,9 +10,12 @@ from app_comum.forms import *
 
 def clientes(request):
     clientes = ClientePF.objects.all()
-    template = loader.get_template('clientes.html')
-    context = RequestContext(request, {'clientes': clientes})
-    return HttpResponse(template.render(context))
+    
+    messages.add_message(
+                request, messages.INFO, 'Erro no formulário! Verifique os campos destacados!')
+    return render(request,'clientes.html',{
+                'clientes': clientes
+                })
 
 
 def add_cliente(request):
@@ -26,17 +29,17 @@ def add_cliente(request):
         form_contato.is_valid():
         
             cliente = form_clientePF.save(commit=False)
-            endereco = form_endereco.save(commit=False)
-            contato = form_contato.save(commit=False)
+            endereco = form_endereco.save(commit=True)
+            contato = form_contato.save(commit=True)
+            cliente.endereco = endereco
+            cliente.contato = contato
+            cliente.save()
             
             messages.add_message(
                 request, messages.INFO, 'Cliente PF adicionado')
             
-            return render(request,'clientes.html',{
-                'cliente': cliente,
-                'endereco': endereco,
-                'contato': contato
-                })
+            return HttpResponseRedirect('/clientes')
+        
         else:
             messages.add_message(
                 request, messages.INFO, 'Erro no formulário! Verifique os campos destacados!')
@@ -58,3 +61,15 @@ def add_cliente(request):
         'form_contato': form_contato
         
         })
+    
+    
+def delete_cliente(request,id_cliente):
+    cliente = ClientePF.objects.get(id=id_cliente)
+    cliente.endereco.delete()
+    cliente.contato.delete()
+    cliente.delete()
+    messages.add_message(
+                request, messages.INFO, 'Cliente '+str(cliente)+' foi deleteado!')
+    
+    return HttpResponseRedirect('/clientes')
+        

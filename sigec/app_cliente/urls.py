@@ -7,4 +7,5 @@ from . import views
 urlpatterns = [
     url(r'^$', views.clientes, name='clientes'),
     url(r'^add_cliente$', views.add_cliente, name='add_cliente'),
+    url(r'^(?P<id_cliente>\d+)/delete_cliente$', views.delete_cliente, name='delete_cliente'),
 ]
