@@ -9,62 +9,61 @@ from app_comum.forms import *
 # Create your views here.
 
 def clientes(request):
-    clientes = ClientePF.objects.all()
-    
+    clientes = Cliente.objects.all()    
     messages.add_message(
                 request, messages.INFO, 'Erro no formulário! Verifique os campos destacados!')
     return render(request,'clientes.html',{
-                'clientes': clientes
+                'clientes': clientes,
                 })
 
 
 def add_cliente(request):
     
     if request.method == 'POST':
-        form_clientePF = FormClientePF(request.POST or None)
-        form_endereco = FormEndereco(request.POST or None)
-        form_contato = FormContato(request.POST or None)
-        
-        if form_clientePF.is_valid() and form_endereco.is_valid() and\
-        form_contato.is_valid():
-        
-            cliente = form_clientePF.save(commit=False)
-            endereco = form_endereco.save(commit=True)
-            contato = form_contato.save(commit=True)
-            cliente.endereco = endereco
-            cliente.contato = contato
-            cliente.save()
-            
-            messages.add_message(
-                request, messages.INFO, 'Cliente PF adicionado')
-            
-            return HttpResponseRedirect('/clientes')
-        
+        if(request.POST.get('tipo_cliente') is not None and request.POST.get('tipo_cliente') == 'pf'):
+            form_cliente = FormClientePF()            
+        elif(request.POST.get('tipo_cliente') is not None and request.POST.get('tipo_cliente') == 'pj'):
+            form_cliente = FormClientePJ()
         else:
-            messages.add_message(
-                request, messages.INFO, 'Erro no formulário! Verifique os campos destacados!')
             
-            return render(request,'add_cliente.html',{
-                'form_clientePF': form_clientePF,
-                'form_endereco': form_endereco,
-                'form_contato': form_contato
-                })
+            if(request.POST.get('cpf')):
+                form_cliente = FormClientePF(request.POST or None)
+            elif(request.POST.get('cnpj')):
+                form_cliente = FormClientePJ(request.POST or None)                
+            
+            form_endereco = FormEndereco(request.POST or None)
+            form_contato = FormContato(request.POST or None)
+            
+            if form_cliente.is_valid() and form_endereco.is_valid() and\
+            form_contato.is_valid():
+            
+                cliente = form_cliente.save(commit=False)
+                endereco = form_endereco.save(commit=True)
+                contato = form_contato.save(commit=True)
+                cliente.endereco = endereco
+                cliente.contato = contato
+                cliente.save()
+                
+                messages.add_message(
+                    request, messages.INFO, 'Cliente PF adicionado')
+                
+                return HttpResponseRedirect('/clientes')
         
-    
-    form_clientePF = FormClientePF()
-    form_endereco = FormEndereco()
-    form_contato = FormContato()
-    
-    return render(request,'add_cliente.html',{
-        'form_clientePF': form_clientePF,
-        'form_endereco': form_endereco,
-        'form_contato': form_contato
+        form_endereco = FormEndereco()
+        form_contato = FormContato()
         
-        })
+        return render(request,'add_cliente.html',{
+            'form_cliente': form_cliente,
+            'form_endereco': form_endereco,
+            'form_contato': form_contato
+            
+            })
+    
+    return render(request,'tipo_cliente.html',{})
     
     
 def delete_cliente(request,id_cliente):
-    cliente = ClientePF.objects.get(id=id_cliente)
+    cliente = Cliente.objects.get(id=id_cliente)
     cliente.endereco.delete()
     cliente.contato.delete()
     cliente.delete()
