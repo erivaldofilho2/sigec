@@ -20,10 +20,12 @@ class FormClientePJ(ModelForm):
     tipo = 'pj'
     class Meta:
         model = ClientePJ
-        fields = ['nome','razao','responsavel','cnpj',]
+        fields = ['nome','razao','responsavel','cnpj','observacao']
         
-#         widgets = {
-#             'nome': TextInput({'class':'form-control'}),
-#             'cpf': TextInput({'class':'form-control'}),
-#             'observacao': Textarea({'class':'form-control'}),
-#             }
+        widgets = {
+            'nome': TextInput({'class':'form-control'}),
+            'razao': TextInput({'class':'form-control'}),
+            'responsavel': TextInput({'class':'form-control'}),
+            'cnpj': TextInput({'class':'form-control'}),
+            'observacao': Textarea({'class':'form-control'}),
+            }

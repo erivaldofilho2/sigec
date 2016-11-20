@@ -10,8 +10,6 @@ from app_comum.forms import *
 
 def clientes(request):
     clientes = Cliente.objects.all()    
-    messages.add_message(
-                request, messages.INFO, 'Erro no formulário! Verifique os campos destacados!')
     return render(request,'clientes.html',{
                 'clientes': clientes,
                 })
@@ -45,9 +43,16 @@ def add_cliente(request):
                 cliente.save()
                 
                 messages.add_message(
-                    request, messages.INFO, 'Cliente PF adicionado')
+                    request, messages.INFO, 'Cliente '+str(cliente)+' adicionado')
                 
                 return HttpResponseRedirect('/clientes')
+            else:
+                
+                return render(request,'add_cliente.html',{
+                    'form_cliente': form_cliente,
+                    'form_endereco': form_endereco,
+                    'form_contato': form_contato
+                    })
         
         form_endereco = FormEndereco()
         form_contato = FormContato()
@@ -71,4 +76,9 @@ def delete_cliente(request,id_cliente):
                 request, messages.INFO, 'Cliente '+str(cliente)+' foi deleteado!')
     
     return HttpResponseRedirect('/clientes')
+
+
+def info_cliente(request, id_cliente):
+    cliente = Cliente.objects.get(id=id_cliente)
+    return render(request,'info_cliente.html',{'cliente':cliente})
         

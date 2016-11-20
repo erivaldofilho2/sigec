@@ -12,6 +12,9 @@ class Cliente(models.Model):
     endereco = models.ForeignKey(Endereco, null=True,blank=True)
     contato = models.ForeignKey(Contato, null=True,blank=True)
     
+    def __unicode__(self):
+        return self.nome or u''
+    
 class ClientePF(Cliente):
     cpf = models.CharField(max_length=14,blank=True)
     observacao = models.TextField(blank=True)
