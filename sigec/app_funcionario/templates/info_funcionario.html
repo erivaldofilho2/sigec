@@ -2,7 +2,8 @@
 	{% block titulo %}Sigec - Funcionario{% endblock %}
 
 {% block content %}
-
+<a href="/funcionarios/{{funcionario.id}}/edit_funcionario">atualizar</a>
+<hr>
 {{funcionario}}
 
 <img src="{{funcionario.foto.url}}" alt="{{funcionario}}" class="img-thumbnail rounded float-xs-right" style="width: 150px; height: 200px;">

@@ -135,9 +135,9 @@ USE_TZ = True
 STATIC_URL = '/webfiles/'
 
 STATICFILES_DIRS = (
-    BASE_DIR+"/webfiles",
+    BASE_DIR + '/webfiles',
 )
 
-MEDIA_ROOT = '/home/erivaldo/django/media/'
+MEDIA_ROOT =  BASE_DIR + '/media/'
 
 MEDIA_URL = '/media/'
