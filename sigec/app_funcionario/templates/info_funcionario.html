@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+	{% block titulo %}Sigec - Funcionario{% endblock %}
+
+{% block content %}
+
+{{funcionario}}
+
+<img src="{{funcionario.foto.url}}" alt="{{funcionario}}" class="img-thumbnail rounded float-xs-right" style="width: 150px; height: 200px;">
+
+{% endblock %}

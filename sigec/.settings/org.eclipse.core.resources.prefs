@@ -3,3 +3,5 @@ encoding//app_cliente/models.py=utf-8
 encoding//app_cliente/views.py=utf-8
 encoding//app_comum/models.py=utf-8
 encoding//app_comum/views.py=utf-8
+encoding//app_funcionario/views.py=utf-8
+encoding//sigec/urls.py=utf-8

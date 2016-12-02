@@ -2,10 +2,9 @@
 	{% block titulo %}Sigec - Clientes{% endblock %}
 
 {% block content %}
-
-<a href="/clientes/add_cliente">Adicionar Cliente</a><hr>
-
-{{cliente}}
+<hr>
+<a href="/clientes/add_cliente">Adicionar Cliente</a>
+<hr>
 <table class="table">
 	<thead>
 		<tr>
@@ -29,7 +28,7 @@
 			<td>Pessoa Juridica</td>
 			<td>{{cliente.clientepj.cnpj}}</td>
 			{% endif %}
-			<td>{{cliente.clientepj.contato|default:"-----"}}</td>
+			<td>{{cliente.clientepj.responsavel|default:"-----"}}</td>
 			<td>{{cliente.contato.tel_celular}}</td>
 			<td>{{cliente.contato.email}}</td>
 			<td><a href="/clientes/{{cliente.id}}/delete_cliente">Remover</a></td>

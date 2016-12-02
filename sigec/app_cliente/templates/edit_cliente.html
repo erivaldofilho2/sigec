@@ -1,17 +1,16 @@
 {% extends "base.html" %}
-	{% block titulo %}Sigec - Clientes{% endblock %}
+{% block titulo %}Sigec - Clientes{% endblock %}
 
 {% block content %}
-<h1>ADD CLIENTE</h1>
-
-<form action="add_cliente" method="post" name="add_cliente" > {% csrf_token %}
+<form action="edit_cliente" method="post" name="edit_cliente"> {% csrf_token %}
 
 {{form_cliente}}
 {{form_endereco}}
 {{form_contato}}
 <hr>
-<button type="submit" class="btn btn-primary" >Cadastrar</button>
+<button type="submit" class="btn btn-primary" >Atualizar</button>
 <a href="/clientes"><button type="button" class="btn btn-primary" >Cancelar</button></a>
 
 </form>
+
 {% endblock %}

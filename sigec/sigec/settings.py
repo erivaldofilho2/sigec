@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app_comum',
     'app_cliente',
+    'app_funcionario',
 ]
 
 MIDDLEWARE = [
@@ -51,15 +52,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-MIDDLEWARE_CLASSES = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    ]
+# MIDDLEWARE_CLASSES = [
+#     'django.middleware.security.SecurityMiddleware',
+#     'django.contrib.sessions.middleware.SessionMiddleware',
+#     'django.middleware.common.CommonMiddleware',
+#     'django.middleware.csrf.CsrfViewMiddleware',
+#     'django.contrib.auth.middleware.AuthenticationMiddleware',
+#     'django.contrib.messages.middleware.MessageMiddleware',
+#     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+#     ]
 
 ROOT_URLCONF = 'sigec.urls'
 
@@ -136,3 +137,7 @@ STATIC_URL = '/webfiles/'
 STATICFILES_DIRS = (
     BASE_DIR+"/webfiles",
 )
+
+MEDIA_ROOT = '/home/erivaldo/django/media/'
+
+MEDIA_URL = '/media/'

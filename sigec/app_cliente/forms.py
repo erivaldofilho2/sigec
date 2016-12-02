@@ -4,7 +4,6 @@ from .models import *
 from app_comum.forms import *
 
 class FormClientePF(ModelForm):
-    tipo = 'pf'
     class Meta:
         model = ClientePF
         fields = ['nome','cpf','observacao']
@@ -17,7 +16,6 @@ class FormClientePF(ModelForm):
 
 
 class FormClientePJ(ModelForm):
-    tipo = 'pj'
     class Meta:
         model = ClientePJ
         fields = ['nome','razao','responsavel','cnpj','observacao']

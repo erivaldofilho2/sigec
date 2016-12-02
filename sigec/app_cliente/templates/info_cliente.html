@@ -2,7 +2,24 @@
 	{% block titulo %}Sigec - Clientes{% endblock %}
 
 {% block content %}
-{{cliente}}
+<hr>
+<a href="/clientes/{{cliente.id}}/edit_cliente">Atualizar</a>
+<hr>
+<br>
+{{cliente}}<br>
 
+{{cliente.clientepf.cpf}}<br>
+{{cliente.clientepj.razao}}<br>
+{{cliente.clientepj.cnpj}}<br>
+{{cliente.endereco.edereco}}<br>
+{{cliente.endereco.numero}}<br>
+{{cliente.endereco.bairro}}<br>
+{{cliente.endereco.cidade}}<br>
+
+{{cliente.contato.tel_fixo}}<br>
+{{cliente.contato.tel_celular}}<br>
+{{cliente.clientepj.responsavel}}<br>
+{{cliente.clientepf.observacao}}<br>
+{{cliente.clientepj.observacao}}<br>
 
 {% endblock %}
