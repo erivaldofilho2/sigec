@@ -5,6 +5,7 @@ from app_funcionario.models import *
 from app_funcionario.forms import *
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
+from app_comum.forms import *
 
 
 
@@ -19,23 +20,35 @@ def funcionarios(request):
 def add_funcionario(request):
     if request.method == 'POST':
         form_funcionario = FormFuncionario(request.POST, request.FILES)
-        if form_funcionario.is_valid():
-            funcionario = form_funcionario.save(commit=True)
-            form_funcionario.save()
-#             funcionario.save()
+        form_endereco = FormEndereco(request.POST)
+        form_contato = FormContato(request.POST)
+        
+        if form_funcionario.is_valid() and form_endereco.is_valid() and form_contato.is_valid():
+            funcionario = form_funcionario.save(commit=False)
+            funcionario.endereco = form_endereco.save(commit=True)
+            funcionario.contato = form_contato.save(commit=True)
+            funcionario.save()
+            
             messages.add_message(
                 request, messages.INFO, 'Funcionario '+str(funcionario)+' adicionado')
             return HttpResponseRedirect('/funcionarios')
         else:
             return render(request, 'add_funcionario.html', {
             'form_funcionario':form_funcionario,
+            'form_endereco':form_endereco,
+            'form_contato':form_contato
             })
         
         return HttpResponseRedirect('/funcionarios')
     else:
         form_funcionario = FormFuncionario()
+        form_endereco = FormEndereco()
+        form_contato = FormContato()
+        
         return render(request, 'add_funcionario.html', {
             'form_funcionario':form_funcionario,
+            'form_endereco': form_endereco,
+            'form_contato': form_contato
             })
 
 
@@ -58,21 +71,36 @@ def edit_funcionario(request, id_funcionario):
     funcionario = Funcionario.objects.get(id=id_funcionario)
     if request.method == 'POST':
         form_funcionario = FormFuncionario(request.POST, request.FILES,instance=funcionario)
-        if form_funcionario.is_valid():
+        form_endereco = FormEndereco(request.POST)
+        form_contato = FormContato(request.POST)
         
-            funcionario = form_funcionario.save(commit=True )
+        if form_funcionario.is_valid() and form_endereco.is_valid() and form_contato.is_valid():
+            funcionario = form_funcionario.save(commit=False)
+            funcionario.endereco = form_endereco.save(commit=True)
+            funcionario.contato = form_contato.save(commit=True)
+            funcionario.save()
             
             messages.add_message(
                 request, messages.INFO, 'Funcionario '+str(funcionario)+' atualizado')
             
-            return HttpResponseRedirect('/funcionarios/'+str(funcionario.id)+'/info_funcionario') 
+            return HttpResponseRedirect('/funcionarios/'+str(funcionario.id)+'/info_funcionario')
+        else:
+            return render(request, 'add_funcionario.html', {
+            'form_funcionario':form_funcionario,
+            'form_endereco':form_endereco,
+            'form_contato':form_contato
+            })
         
     else:
         form_funcionario = FormFuncionario(instance=funcionario)
+        form_endereco = FormEndereco(instance=funcionario.endereco)
+        form_contato = FormContato(instance=funcionario.contato)
         
         return render(request, 
                       'edit_funcionario.html',{
                           'form_funcionario':form_funcionario,
+                          'form_endereco':form_endereco,
+                          'form_contato':form_contato
                           })
 
     

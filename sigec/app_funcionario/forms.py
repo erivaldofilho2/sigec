@@ -6,7 +6,7 @@ from app_comum.forms import *
 class FormFuncionario(ModelForm):
     class Meta:
         model = Funcionario
-        fields = ['nome','cpf','foto']
+        fields = ['nome','cpf','foto','data_entrada','data_saida']
          
         widgets = {
             'nome': TextInput({'class':'form-control'}),

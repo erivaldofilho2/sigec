@@ -5,6 +5,8 @@
 
 <form method="POST" action="edit_funcionario" enctype="multipart/form-data"> {% csrf_token %}
 {{form_funcionario}}
+{{form_endereco}}
+{{form_contato}}
 <hr>
 <button type="submit" class="btn btn-primary" >Cadastrar</button>
 <a href="/funcionarios"><button type="button" class="btn btn-primary" >Cancelar</button></a>

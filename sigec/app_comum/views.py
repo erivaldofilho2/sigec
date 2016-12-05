@@ -47,7 +47,7 @@ def logout(request):
     return HttpResponseRedirect('/login')
 
 
-#@login_required(login_url='/login')
+@login_required(login_url='/login')
 def home(request):
     template = loader.get_template('home.html')
     context = RequestContext(request, {'chave': 'valor'})

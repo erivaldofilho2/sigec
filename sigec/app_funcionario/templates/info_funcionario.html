@@ -6,6 +6,6 @@
 <hr>
 {{funcionario}}
 
-<img src="{{funcionario.foto.url}}" alt="{{funcionario}}" class="img-thumbnail rounded float-xs-right" style="width: 150px; height: 200px;">
+<img src="{%if funcionario.foto %}{{funcionario.foto.url}}{%endif%}" alt="{{funcionario}}" class="img-thumbnail rounded float-xs-right" style="width: 150px; height: 200px;">
 
 {% endblock %}
