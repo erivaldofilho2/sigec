@@ -18,7 +18,7 @@
 	<tbody>
 		{%for funcionario in funcionarios%}
 		<tr>	
-			<td><a href="/funcionarios/{{funcionario.id}}/info_funcionario">{{funcionario.nome}}</a></td>
+			<td><a href="/funcionarios/{{funcionario.id}}/info_funcionario">{{funcionario.user.first_name}}</a></td>
 			<td>{{funcionario.cpf}}</td>
 			<td>{{funcionario.contato.telefone}}</td>
 			<td>{{funcionario.contato.email}}</td>

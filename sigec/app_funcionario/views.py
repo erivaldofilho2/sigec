@@ -22,11 +22,13 @@ def add_funcionario(request):
         form_funcionario = FormFuncionario(request.POST, request.FILES)
         form_endereco = FormEndereco(request.POST)
         form_contato = FormContato(request.POST)
+        form_user = FormUser(request.POST)
         
-        if form_funcionario.is_valid() and form_endereco.is_valid() and form_contato.is_valid():
+        if form_funcionario.is_valid() and form_endereco.is_valid() and form_contato.is_valid() and form_user.is_valid():
             funcionario = form_funcionario.save(commit=False)
             funcionario.endereco = form_endereco.save(commit=True)
             funcionario.contato = form_contato.save(commit=True)
+            funcionario.user = form_user.save(commit=True)
             funcionario.save()
             
             messages.add_message(
@@ -36,7 +38,8 @@ def add_funcionario(request):
             return render(request, 'add_funcionario.html', {
             'form_funcionario':form_funcionario,
             'form_endereco':form_endereco,
-            'form_contato':form_contato
+            'form_contato':form_contato,
+            'form_user': form_user
             })
         
         return HttpResponseRedirect('/funcionarios')
@@ -44,11 +47,13 @@ def add_funcionario(request):
         form_funcionario = FormFuncionario()
         form_endereco = FormEndereco()
         form_contato = FormContato()
+        form_user = FormUser()
         
         return render(request, 'add_funcionario.html', {
             'form_funcionario':form_funcionario,
             'form_endereco': form_endereco,
-            'form_contato': form_contato
+            'form_contato': form_contato,
+            'form_user': form_user
             })
 
 
