@@ -65,6 +65,12 @@ def info_funcionario(request, id_funcionario):
 
 def delete_funcionario(request,id_funcionario):
     funcionario = Funcionario.objects.get(id=id_funcionario)
+    if(funcionario.endereco is not None):
+        funcionario.endereco.delete()
+    if(funcionario.contato is not None):
+        funcionario.contato.delete()
+    if(funcionario.user is not None):
+        funcionario.user.delete()
     funcionario.delete()
     messages.add_message(
                 request, messages.INFO, 'Cliente '+str(funcionario)+' foi deleteado!')

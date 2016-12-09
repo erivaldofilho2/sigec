@@ -2,7 +2,11 @@
 	{% block titulo %}Sigec - Funcionario{% endblock %}
 
 {% block content %}
+
 <form method="POST" action="add_funcionario" enctype="multipart/form-data"> {% csrf_token %}
+
+
+
 {{form_user}}
 {{form_funcionario}}
 {{form_endereco}}

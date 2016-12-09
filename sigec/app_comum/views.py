@@ -21,10 +21,7 @@ def login(request):
         if usuario is not None:
             if usuario.is_active:
                 login_auth(request, usuario)                
-                if usuario.has_perm('lrh.secretaria'):
-                    return HttpResponseRedirect('/')
-                else:
-                    return HttpResponseRedirect('/colaboradores/info')
+                return HttpResponseRedirect('/')
             else:
                 mensagem = 'Usuário desabilitado, '\
                            'contate o Administrador do sistema.'
@@ -33,13 +30,14 @@ def login(request):
                 return HttpResponse(template.render(context))
         else:
             mensagem = 'Usuário ou senha inválido.'
-            template = loader.get_template('login.html')
-            context = RequestContext(request, {'mensagem': mensagem})
-            return HttpResponse(template.render(context))
+#             template = loader.get_template('login.html')
+#             context = RequestContext(request, {'mensagem': mensagem})
+#             return HttpResponse(template.render(context))
+            return render(request,'login.html',{'mensagem': mensagem})
+
 
     else:
-        context = RequestContext(request)
-        return HttpResponse(template.render(context))
+        return render(request,'login.html',{})
 
 
 def logout(request):
@@ -49,6 +47,4 @@ def logout(request):
 
 @login_required(login_url='/login')
 def home(request):
-    template = loader.get_template('home.html')
-    context = RequestContext(request, {'chave': 'valor'})
-    return HttpResponse(template.render(context))
+    return render(request,'home.html',{})

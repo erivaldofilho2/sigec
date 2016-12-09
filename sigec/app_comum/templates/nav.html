@@ -6,8 +6,10 @@
     <a class="nav-item nav-link" href="/funcionarios">Funcionários</a>
     <a class="nav-item nav-link" href="#">Relatórios</a>
     <a class="nav-item nav-link" href="#">RAT</a>
-    <a class="nav-item nav-link" href="#">{{ request.path }}</a>
-
+    
+	<div class="nav-rigth">
+	Bem Vindo <a href="#">{{ request.user.first_name }}</a> | 
+	<a href="/logout">Sair</a>
+	<img id="img-top" src="{%if request.user.funcionario.foto %}{{request.user.funcionario.foto.url}}{%endif%}" alt="{{request.user.funcionario}}">
+	</div>
   </div>
-
-

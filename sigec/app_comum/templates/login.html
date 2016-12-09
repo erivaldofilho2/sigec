@@ -47,7 +47,7 @@
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
+  background: #538eab;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -58,7 +58,7 @@
   cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #43A047;
+  background: #0973a7;
 }
 .form .message {
   margin: 15px 0 0;
@@ -106,11 +106,7 @@
   color: #EF3B3A;
 }
 body {
-  background: #76b852; /* fallback for old browsers */
-  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-  background: -moz-linear-gradient(right, #76b852, #8DC26F);
-  background: -o-linear-gradient(right, #76b852, #8DC26F);
-  background: linear-gradient(to left, #76b852, #8DC26F);
+  background: linear-gradient(to left, #dedede, #dedede);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
@@ -122,15 +118,16 @@ body {
 
 	<div class="container-fluid">
 
-	<div class="login-page">
-  <div class="form">
-    <form action="login" method="POST" class="form-login"> {% csrf_token %}
-      <input type="text" placeholder="name" name="usuario"/>
-      <input type="password" placeholder="password" name="senha"/>
-      <button>Login</button>
-    </form>
-  </div>
-</div>
+		<div class="login-page">
+		  <div class="error">{{mensagem}}</div>
+		  <div class="form">
+		    <form action="login" method="POST" class="form-login"> {% csrf_token %}
+		      <input type="text" placeholder="name" name="usuario"/>
+		      <input type="password" placeholder="password" name="senha"/>
+		      <button>Login</button>
+		    </form>
+		  </div>
+		</div>
 
 	</div><!-- container-fluid -->
 	

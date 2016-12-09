@@ -14,6 +14,8 @@ class FormFuncionario(ModelForm):
 #             'nome': TextInput({'class':'form-control'}),
             'cpf': TextInput({'class':'form-control'}),
             'foto': FileInput({'class':'form-control'}),
+            'data_entrada': TextInput({'class':'form-control'}),
+            'data_saida': TextInput({'class':'form-control'}),
             }
         
 
@@ -21,18 +23,10 @@ class FormUser(ModelForm):
     class Meta:
         model = User
         fields = ['first_name','last_name','username', 'password']
-# 
-# 
-# class FormClientePJ(ModelForm):
-#     tipo = 'pj'
-#     class Meta:
-#         model = ClientePJ
-#         fields = ['nome','razao','responsavel','cnpj','observacao']
-#         
-#         widgets = {
-#             'nome': TextInput({'class':'form-control'}),
-#             'razao': TextInput({'class':'form-control'}),
-#             'responsavel': TextInput({'class':'form-control'}),
-#             'cnpj': TextInput({'class':'form-control'}),
-#             'observacao': Textarea({'class':'form-control'}),
-#             }
+        
+        widgets = {
+                'first_name': TextInput({'class':'form-control'}),
+                'last_name': TextInput({'class':'form-control'}),
+                'username': TextInput({'class':'form-control'}),
+                'password': TextInput({'class':'form-control'}),
+            } 
