@@ -1,77 +1,240 @@
  {% load static from staticfiles %}
 <!DOCTYPE html>
-<html>
-<head>
-<title>{%block titulo %} {% endblock%}</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="{% static "lib/bootstrap-4-alpha/css/bootstrap.min.css" %}">
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <title>{%block titulo %} {% endblock%}</title>
 
-<link rel="stylesheet" type="text/css" href="{% static "estilo.css" %}">
-
-{% block styles %}
-
-{% endblock %}
-<link rel="shortcut icon" href="{% static "favicon.ico" %}" type="image/x-icon">
-<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-
-
-</head>
-<body>
+    <!-- Bootstrap -->
+    <link href="{% static "vendors/bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet" >
+    <!-- Font Awesome -->
+    <link href="{% static "vendors/font-awesome/css/font-awesome.min.css"%}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{% static "vendors/nprogress/nprogress.css" %}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{% static "vendors/iCheck/skins/flat/green.css" %}" rel="stylesheet">
 	
-	{%if messages%}
-	<div id="messageModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-sm">
-	  	<div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" style="text-align:center;"> Alerta!</h4>
-	      </div>
-	      <div class="modal-body">
+    <!-- bootstrap-progressbar -->
+    <link href="{% static "vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" %}" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="{% static "vendors/jqvmap/dist/jqvmap.min.css" %}" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="{% static "vendors/bootstrap-daterangepicker/daterangepicker.css " %}" rel="stylesheet">
 
-	      	{%for message in messages%}
-				<h3>{{message}}</h3>
-			{% endfor %}
+    <!-- Custom Theme Style -->
+    <link href="{% static "build/css/custom.min.css" %}" rel="stylesheet">
+  </head>
 
-	      </div>
-	      <div class="modal-footer">
-	      </div>
-	    </div><!-- /.modal-content -->
-	  </div>
-	</div>
-	{%endif%}
-	
-	{% include "header.html" %}
-	{%if request.user.id %}
-	{% endif %}
-		{% block nav %}
-			
-		{% endblock %}
-	<div class="container">
-	{%block content %}
-		
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>SIGEC - ProgNet</span></a>
+            </div>
 
-		
-		
-	{% endblock %}
-	</div><!-- container-fluid -->
-	<script language="JavaScript" type="text/javascript" src="{% static "lib/jquery-1.11.3.min.js" %}"></script>
-	<script language="JavaScript" type="text/javascript" src="{% static "lib/bootstrap-4-alpha/js/bootstrap.min.js" %}"></script>
-	{% block javascripts %}
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="{%if request.user.funcionario.foto %}{{request.user.funcionario.foto.url}}{%endif%}" alt="{{request.user.funcionario}}" class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Bem Vindo,</span>
+                <h2>{{request.user.funcionario}}</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            {% include "sidebar-menu.html" %}
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="{%if request.user.funcionario.foto %}{{request.user.funcionario.foto.url}}{%endif%}" alt="">{{request.user.funcionario}}
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> Profile</a></li>
+                    <li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>Settings</span>
+                      </a>
+                    </li>
+                    <li><a href="javascript:;">Help</a></li>
+                    <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="{%if request.user.funcionario.foto %}{{request.user.funcionario.foto.url}}{%endif%}" alt="Profile Image" /></span>
+                        <span>
+                          <span>{{request.user.funcionario}}</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>{{request.user.funcionario}}</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+        
+        <!-- page content --> 
+        <div class="right_col" role="main">   
+        {%block content %}
+    
+    
+        {% endblock %}
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            ProgNet - Solução em Tecnologia da Informação
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="{% static "vendors/jquery/dist/jquery.min.js" %}"  ></script>
+    <!-- Bootstrap -->
+    <script src="{% static "vendors/bootstrap/dist/js/bootstrap.min.js" %}" ></script>
+    <!-- FastClick -->
+    <script src="{% static "vendors/fastclick/lib/fastclick.js" %}" ></script>
+    <!-- NProgress -->
+    <script src="{% static "vendors/nprogress/nprogress.js" %}" ></script>
+    <!-- Chart.js -->
+    <script src="{% static "vendors/Chart.js/dist/Chart.min.js" %}" ></script>
+    <!-- gauge.js -->
+    <script src="{% static "vendors/gauge.js/dist/gauge.min.js" %}" ></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static "vendors/bootstrap-progressbar/bootstrap-progressbar.min.js" %}" ></script>
+    <!-- iCheck -->
+    <script src="{% static "vendors/iCheck/icheck.min.js" %}" ></script>
+    <!-- Skycons -->
+    <script src="../vendors/skycons/skycons.js" %}" ></script>
+    <!-- Flot -->
+    <script src="{% static "vendors/Flot/jquery.flot.js" %}" ></script>
+    <script src="{% static "vendors/Flot/jquery.flot.pie.js" %}" ></script>
+    <script src="{% static "vendors/Flot/jquery.flot.time.js" %}" ></script>
+    <script src="{% static "vendors/Flot/jquery.flot.stack.js" %}" ></script>
+    <script src="{% static "vendors/Flot/jquery.flot.resize.js" %}" ></script>
+    <!-- Flot plugins -->
+    <script src="{% static "vendors/flot.orderbars/js/jquery.flot.orderBars.js" %}" ></script>
+    <script src="{% static "vendors/flot-spline/js/jquery.flot.spline.min.js" %}" ></script>
+    <script src="{% static "vendors/flot.curvedlines/curvedLines.js" %}" ></script>
+    <!-- DateJS -->
+    <script src="{% static "vendors/DateJS/build/date.js" %}" ></script>
+    <!-- JQVMap -->
+    <script src="{% static "vendors/jqvmap/dist/jquery.vmap.js" %}" ></script>
+    <script src="{% static "vendors/jqvmap/dist/maps/jquery.vmap.world.js" %}" ></script>
+    <script src="{% static "vendors/jqvmap/examples/js/jquery.vmap.sampledata.js" %}" ></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static "vendors/moment/min/moment.min.js" %}" ></script>
+    <script src="{% static "vendors/bootstrap-daterangepicker/daterangepicker.js" %}" ></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{% static "build/js/custom.min.js" %}" ></script>
 	
-	{% endblock %}
-	
-	{%if messages%}
-	<script language="JavaScript" type="text/javascript">	
-	$(document).ready(function() {
-	   $('#messageModal').modal('show');
-	});
-	{%endif%}
-	
-	
-</script>
-</body>
+  </body>
 </html>
-

@@ -1,0 +1,78 @@
+ {% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>{%block titulo %} {% endblock%}</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{% static "lib/bootstrap-4-alpha/css/bootstrap.min.css" %}">
+
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+
+<link rel="stylesheet" type="text/css" href="{% static "estilo.css" %}">
+
+{% block styles %}
+
+{% endblock %}
+<link rel="shortcut icon" href="{% static "favicon.ico" %}" type="image/x-icon">
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+
+</head>
+<body>
+	
+	{%if messages%}
+	<div id="messageModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-sm">
+	  	<div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" style="text-align:center;"> Alerta!</h4>
+	      </div>
+	      <div class="modal-body">
+
+	      	{%for message in messages%}
+				<h3>{{message}}</h3>
+			{% endfor %}
+
+	      </div>
+	      <div class="modal-footer">
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div>
+	</div>
+	{%endif%}
+	
+	{% include "header.html" %}
+	{%if request.user.id %}
+	{% endif %}
+		{% block nav %}
+			
+		{% endblock %}
+	<div class="container">
+	{%block content %}
+		
+
+		
+		
+	{% endblock %}
+	</div><!-- container-fluid -->
+	<script language="JavaScript" type="text/javascript" src="{% static "lib/jquery-1.11.3.min.js" %}"></script>
+	<script language="JavaScript" type="text/javascript" src="{% static "lib/bootstrap-4-alpha/js/bootstrap.min.js" %}"></script>
+	{% block javascripts %}
+	
+	{% endblock %}
+	
+	{%if messages%}
+	<script language="JavaScript" type="text/javascript">	
+	$(document).ready(function() {
+	   $('#messageModal').modal('show');
+	});
+	{%endif%}
+	
+	
+</script>
+{% include "footer.html" %}
+</body>
+</html>
+

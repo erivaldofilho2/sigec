@@ -28,7 +28,13 @@ def add_funcionario(request):
             funcionario = form_funcionario.save(commit=False)
             funcionario.endereco = form_endereco.save(commit=True)
             funcionario.contato = form_contato.save(commit=True)
-            funcionario.user = form_user.save(commit=True)
+
+            user = User.objects.create_user(form_user.cleaned_data['username'], form_contato.cleaned_data['email'], form_user.cleaned_data['password'])
+            user.first_name = form_user.cleaned_data['first_name'] 
+            user.last_name = form_user.cleaned_data['last_name']
+            user.save()
+
+            funcionario.user = user 
             funcionario.save()
             
             messages.add_message(

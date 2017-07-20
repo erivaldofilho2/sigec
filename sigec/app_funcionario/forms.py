@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm, URLInput, TextInput, Select, EmailInput, DateInput, NumberInput, Textarea, FileInput
+from django.forms import ModelForm, URLInput, TextInput, Select, EmailInput, DateInput, NumberInput, Textarea, FileInput,PasswordInput
 from .models import *
 from app_comum.forms import *
 from django.contrib.auth.models import User
@@ -28,5 +28,5 @@ class FormUser(ModelForm):
                 'first_name': TextInput({'class':'form-control'}),
                 'last_name': TextInput({'class':'form-control'}),
                 'username': TextInput({'class':'form-control'}),
-                'password': TextInput({'class':'form-control'}),
+                'password': PasswordInput({'class':'form-control'}),
             } 
