@@ -2,16 +2,57 @@
 	{% block titulo %}Sigec - Clientes{% endblock %}
 
 {% block content %}
-<h1>ADD CLIENTE</h1>
-
-<form action="/clientes/add_cliente" method="post"> {% csrf_token %}
-
-<input type="radio" name="tipo_cliente" value="pf" checked="checked"> Pessoa Física
-<input type="radio" name="tipo_cliente" value="pj"> Pessoa Juridica
 
 
-<button type="submit" class="btn btn-primary" >Avançar</button>
-<a href="/clientes"><button type="button" class="btn btn-primary" >Cancelar</button></a>
 
-</form>
+<h2>Novo Cliente <small>Sessions</small></h2>
+
+                    <p>This is a basic form wizard example that inherits the colors from the selected scheme.</p>
+                    <div id="wizard" class="form_wizard wizard_horizontal">
+                      <ul class="wizard_steps">
+                        <li>
+                          <a  href="#step-1">
+                            <span class="step_no">1</span>
+                            <span class="step_descr">
+                                              Pessa Fisica ou Juridica?<br />
+                                              <small>Diga se é pessoa fisica ou juridica</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a class="disabled" href="#step-2">
+                            <span class="step_no">2</span>
+                            <span class="step_descr">
+                                              Step 2<br />
+                                              <small>Step 2 description</small>
+                                          </span>
+                          </a>
+                        </li>
+                      </ul>
+                     <div class="stepContainer" id="step-1" style="text-align:center;">
+                        
+
+                        <form action="/clientes/add_cliente" method="post" class="form-horizontal form-label-left"> {% csrf_token %}
+                        <div class="form-group">
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-default">
+								<input type="radio" name="tipo_cliente" value="pf" checked="checked"> Pessoa Física</label>
+							<label class="btn btn-default">
+								<input type="radio" name="tipo_cliente" value="pj"> Pessoa Juridica
+							</label>
+						</div>
+						</div>
+						
+                       
+                      </div>
+                
+
+                    </div>
+                    <!-- End SmartWizard Content -->
+                    <div class="actionBar">
+						<a href="/clientes" class="buttonNext btn btn-default"> Cancelar</a>
+						<button type="submit" class="btn buttonNext btn btn-success" >Avançar</button>
+                    </div>
+                    </form>
+
 {% endblock %}

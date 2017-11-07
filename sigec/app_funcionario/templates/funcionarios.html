@@ -3,7 +3,8 @@
 
 {% block content %}
 <hr>
-<a href="/funcionarios/add_funcionario">Adicionar Funcionario</a>
+<a href="/funcionarios/add_funcionario" class="btn btn-info"><i class="fa fa-pencil-square m-right-xs"></i>Adicionar Funcionario</a>
+
 <hr>
 <table class="table">
 	<thead>
@@ -18,7 +19,7 @@
 	<tbody>
 		{%for funcionario in funcionarios%}
 		<tr>	
-			<td><a href="/funcionarios/{{funcionario.id}}/info_funcionario">{{funcionario.user.first_name}}</a></td>
+			<td><a href="/funcionarios/{{funcionario.id}}/info_funcionario">{{funcionario.user.first_name}} {{funcionario.user.last_name}}</a></td>
 			<td>{{funcionario.cpf}}</td>
 			<td>{{funcionario.contato.telefone}}</td>
 			<td>{{funcionario.contato.email}}</td>

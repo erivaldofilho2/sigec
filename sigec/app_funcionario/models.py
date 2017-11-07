@@ -15,5 +15,6 @@ class Funcionario(models.Model):
     data_saida = models.DateField(null=True,blank=True)
     endereco = models.ForeignKey(Endereco, null=True,blank=True)
     contato = models.ForeignKey(Contato, null=True,blank=True)
+    cargo = models.CharField(max_length=100)
     def __unicode__(self):
         return self.user.first_name or u''
